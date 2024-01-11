@@ -25,7 +25,7 @@ def create_inputs(radius: float,point_density: float) -> np.array:
 
 def get_num_points(radius: float, point_density: float) -> int:
     circumference = tau*radius
-    num_points = int(circumference*point_density)
+    num_points = abs(int(circumference*point_density))
     if num_points < 10:
         return(10)
     else:

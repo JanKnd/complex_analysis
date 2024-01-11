@@ -8,7 +8,7 @@ import cmath
 
 def function(z: complex) -> complex:
     #f(x) = x^2
-    return(z+(z**2)*(0+1j))
+    return(z+(cmath.tan(z))*(0+1j))
 
 def input_to_output(inputs: np.array) -> np.array:
     outputs = []

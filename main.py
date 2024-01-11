@@ -6,5 +6,5 @@ import cmath
 #files
 import plot as p
 
-p.single_layer_plot(1,100)
+p.plot_single_layer(4,1000)
 
