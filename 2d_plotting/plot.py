@@ -1,6 +1,7 @@
 import numpy as np
 import cmath
 import matplotlib.pyplot as plt
+import datetime
 
 import function as f
 import input_creation as ic
@@ -8,12 +9,17 @@ import input_creation as ic
 ax = plt.figure().add_subplot(projection='3d')
 
 def single_layer_figure(radius: float,point_density:float):
+    #t_start = datetime.datetime.now()
+
     complex_outputs = f.input_to_output(ic.create_inputs(radius,point_density))
     x = np.full(complex_outputs.size,radius,dtype=float)
     y = f.real_from_complex(complex_outputs)
     z = f.imag_from_complex(complex_outputs)    
     ax.plot(x,y,z, color="blue")
 
+    #t_end = datetime.datetime.now()
+    #t_delta = t_end - t_start
+    #print("TIME singe_layer_figure: {}; RADIUS: {}".format(t_delta.microseconds, radius))
 
 def plot_single_layer(radius: float, point_density:float):
     single_layer_figure(radius,point_density)
@@ -22,6 +28,8 @@ def plot_single_layer(radius: float, point_density:float):
 
 
 def plot_multi_layer(start_radius:float, end_radius:float, layer_density:float, point_density:float):
+    t_start = datetime.datetime.now()
+    
     delta_radius = abs(end_radius-start_radius)
     num_layers = get_num_layers(delta_radius,layer_density)
     radius_step = get_radius_step(delta_radius, num_layers)
@@ -29,8 +37,12 @@ def plot_multi_layer(start_radius:float, end_radius:float, layer_density:float, 
     for i in range(num_layers):
         single_layer_figure(curr_radius, point_density)
         curr_radius += radius_step
-    plt.show()
 
+    t_end = datetime.datetime.now()
+    t_delta = t_end - t_start
+    print("TIME plot_multi_layer: {}".format(t_delta.microseconds))
+    
+    plt.show()
 
 
 def get_num_layers(delta_radius: float, layer_density:float) -> float:

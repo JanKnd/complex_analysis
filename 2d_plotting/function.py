@@ -5,6 +5,7 @@
 # f(x) {x ∈ R   ->   z(x)=x+f(x)i {x ∈ C
 import numpy as np
 import cmath
+import time
 
 def function(z: complex) -> complex:
     #f(x) = x^2
@@ -14,7 +15,6 @@ def input_to_output(inputs: np.array) -> np.array:
     outputs = []
     for input in inputs:
         outputs.append(function(input))
-
     return(np.asarray(outputs))
 
 def real_from_complex(complex_arr: np.array) -> np.array:
